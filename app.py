@@ -30,10 +30,10 @@ def create_full_report(data):
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font("Helvetica", style='B', size=20)
-    pdf.cell(0, 15, "CardioGuard", align='C', new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 15, "CardioGuard", align='C', ln=1)
     pdf.ln(5)
     pdf.set_font("Helvetica", size=14)
-    pdf.cell(0, 10, "AI Heart Disease Analysis Report", align='C', new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 10, "AI Heart Disease Analysis Report", align='C', ln=1)
     pdf.ln(10)
     pdf.set_draw_color(229, 46, 113)
     pdf.set_line_width(0.8)
@@ -41,24 +41,24 @@ def create_full_report(data):
     pdf.ln(10)
 
     pdf.set_font("Helvetica", size=11)
-    pdf.cell(0, 8, f"Date & Time: {data['timestamp']}", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 8, f"Date & Time: {data['timestamp']}", ln=1)
     pdf.ln(8)
 
     pdf.set_font("Helvetica", style='B', size=13)
-    pdf.cell(0, 10, "1. Prediction Result", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 10, "1. Prediction Result", ln=1)
     pdf.set_font("Helvetica", size=11)
     status = "No Heart Disease Detected (Healthy)" if data['is_healthy'] else "Heart Disease Risk Detected"
-    pdf.cell(0, 8, f"   Status: {status}", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 8, f"   Status: {status}", ln=1)
     pdf.ln(6)
 
     pdf.set_font("Helvetica", style='B', size=13)
-    pdf.cell(0, 10, "2. Risk Probability & Confidence", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 10, "2. Risk Probability & Confidence", ln=1)
     pdf.set_font("Helvetica", size=11)
-    pdf.cell(0, 8, f"   Model Confidence: {data['confidence']}%", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 8, f"   Model Confidence: {data['confidence']}%", ln=1)
     pdf.ln(6)
 
     pdf.set_font("Helvetica", style='B', size=13)
-    pdf.cell(0, 10, "3. Input Health Parameters", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 10, "3. Input Health Parameters", ln=1)
     pdf.set_font("Helvetica", size=11)
     params = data['input_params']
     param_list = [
@@ -78,18 +78,18 @@ def create_full_report(data):
     ]
     for label, value in param_list:
         pdf.cell(80, 7, f"   {label}:")
-        pdf.cell(0, 7, value, new_x="LMARGIN", new_y="NEXT")
+        pdf.cell(0, 7, value, ln=1)
     pdf.ln(5)
 
     pdf.set_font("Helvetica", style='B', size=13)
-    pdf.cell(0, 10, "4. Key Feature Importance", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 10, "4. Key Feature Importance", ln=1)
     pdf.set_font("Helvetica", size=11)
     for feat, imp in [("Thalassemia","18%"),("Major Vessels (CA)","16%"),("Chest Pain","13%"),("Max HR","11%"),("Oldpeak","10%")]:
-        pdf.cell(0, 7, f"   - {feat}: {imp}", new_x="LMARGIN", new_y="NEXT")
+        pdf.cell(0, 7, f"   - {feat}: {imp}", ln=1)
     pdf.ln(5)
 
     pdf.set_font("Helvetica", style='B', size=13)
-    pdf.cell(0, 10, "5. Personalized Health Suggestions", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 10, "5. Personalized Health Suggestions", ln=1)
     pdf.set_font("Helvetica", size=11)
     if data['is_healthy']:
         tips = ["Maintain current healthy lifestyle.", "150+ min moderate exercise/week.",
@@ -99,7 +99,7 @@ def create_full_report(data):
                 "30 min moderate exercise daily.", "Monitor BP & cholesterol regularly.",
                 "Reduce sodium, manage stress.", "Avoid smoking, limit alcohol."]
     for i, tip in enumerate(tips, 1):
-        pdf.cell(0, 7, f"   {i}. {tip}", new_x="LMARGIN", new_y="NEXT")
+        pdf.cell(0, 7, f"   {i}. {tip}", ln=1)
 
     pdf.ln(10)
     pdf.set_draw_color(229, 46, 113)
