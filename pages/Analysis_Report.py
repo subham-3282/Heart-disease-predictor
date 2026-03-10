@@ -149,7 +149,8 @@ def create_full_report(data):
     pdf.ln(5)
     pdf.set_font("Helvetica", style='I', size=9)
     pdf.multi_cell(0, 6, "Disclaimer: AI-generated report. NOT a substitute for professional medical advice.")
-    return bytes(pdf.output())
+    out = pdf.output(dest="S")
+    return bytes(out) if isinstance(out, (bytes, bytearray)) else out.encode("latin-1")
 
 
 # ======= SIDEBAR — PDF download persists here =======
