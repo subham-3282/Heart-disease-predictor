@@ -141,10 +141,11 @@ with st.sidebar:
     st.markdown("##### 🤖 AI Tip")
     st.caption("Regular cardiovascular exercise and a balanced diet significantly reduce heart disease risk.")
 
+    st.markdown("####")  # subtle spacing
+    st.markdown("##### 📑 Analysis Report")
+
     # ===== CONDITIONAL PDF BUTTON — only after prediction =====
     if st.session_state.last_prediction is not None:
-        st.markdown("####")  # subtle spacing
-        st.markdown("##### 📑 Analysis Report")
         pred_data = st.session_state.last_prediction
 
         if pred_data['is_healthy']:
@@ -166,6 +167,8 @@ with st.sidebar:
             )
         except Exception as e:
             st.error(f"Report error: {e}")
+    else:
+        st.info("💡 Make a prediction first to generate your Analysis Report.")
 
 
 # ======= RESOLVE THEME VARIABLES =======
@@ -254,8 +257,8 @@ div[data-testid="stVerticalBlock"] > div:empty {{
 }}
 
 /* ===== GLASSMORPHISM CARDS ===== */
-div[data-testid="stForm"],
-div[data-testid="stVerticalBlock"] > div > div:not(:has(.marquee-container)):not(:has(.video-bg-wrapper)):not(:empty) {{
+section[data-testid="stMain"] div[data-testid="stForm"],
+section[data-testid="stMain"] div[data-testid="stVerticalBlock"] > div > div:not(:has(.marquee-container)):not(:has(.video-bg-wrapper)):not(:empty) {{
     background: {card_bg} !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
@@ -421,17 +424,6 @@ section[data-testid="stSidebar"] h4,
 section[data-testid="stSidebar"] h5,
 section[data-testid="stSidebar"] p,
 section[data-testid="stSidebar"] span,
-section[data-testid="stSidebar"] label {{
-    color: {sidebar_text} !important;
-    text-shadow: none !important;
-}}
-/* Remove glassmorphism from sidebar items */
-section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] > div > div {{
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
     padding: 0 !important;
 }}
 </style>
